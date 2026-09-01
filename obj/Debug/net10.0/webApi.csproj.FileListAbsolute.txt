@@ -164,3 +164,4 @@
 /Users/jacreator/Herd/Net Projects/webApi/webApi/bin/Debug/net10.0/runtimes/win-arm64/native/msalruntime_arm64.dll
 /Users/jacreator/Herd/Net Projects/webApi/webApi/bin/Debug/net10.0/runtimes/win-x64/native/msalruntime.dll
 /Users/jacreator/Herd/Net Projects/webApi/webApi/bin/Debug/net10.0/runtimes/win-x86/native/msalruntime_x86.dll
+/Users/jacreator/Herd/Net Projects/webApi/webApi/obj/Debug/net10.0/webApi.sourcelink.json

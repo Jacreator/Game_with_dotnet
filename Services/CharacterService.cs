@@ -12,29 +12,53 @@ public class CharacterService(AppDbContext _context) : ICharacterRepo
             new() { Id = 2, Name = "Something", Level = 18, Class = "Archer", Game = "Lord of the Rings", Role = "DPS" },
             new() { Id = 3, Name = "Gandalf", Level = 25, Class = "Wizard", Game = "Lord of the Rings", Role = "Support" }
           ];
-  public Task<List<model.Character>> GetCharacters()
+  public Task<List<Dtos.CharacterDto>> GetCharacters()
   {
-    return _context.Characters.ToListAsync();
+    return _context.Characters.Select(c => new Dtos.CharacterDto
+    {
+        Name = c.Name,
+        Level = c.Level,
+        Class = c.Class,
+        Role = c.Role
+    }).ToListAsync();
   }
 
-  public async Task<model.Character> GetCharacterById(int id)
+  public async Task<Dtos.CharacterDto> GetCharacterById(int id)
   {
-    var character = await _context.Characters.FindAsync(id) ?? throw new KeyNotFoundException($"Character with ID {id} not found.");
-    return character;
+    var character = await _context.Characters.Where(c => c.Id == id).FirstOrDefaultAsync() ?? throw new KeyNotFoundException($"Character with ID {id} not found.");
+    return new Dtos.CharacterDto
+    {
+        Name = character.Name,
+        Level = character.Level,
+        Class = character.Class,
+        Role = character.Role
+    };
   }
 
-  public async Task<model.Character> AddCharacter(model.Character character)
+  public async Task<Dtos.CharacterDto> AddCharacter(model.Character character)
   {
     _context.Characters.Add(character);
     await _context.SaveChangesAsync();
-    return character;
+    return new Dtos.CharacterDto
+    {
+        Name = character.Name,
+        Level = character.Level,
+        Class = character.Class,
+        Role = character.Role
+    };
   }
 
-  public async Task<model.Character> UpdateCharacter(model.Character character)
+  public async Task<Dtos.CharacterDto> UpdateCharacter(model.Character character)
   {
     _context.Characters.Update(character);
     await _context.SaveChangesAsync();
-    return character;
+    return new Dtos.CharacterDto
+    {
+        Name = character.Name,
+        Level = character.Level,
+        Class = character.Class,
+        Role = character.Role
+    };
   }
 
   public async Task<bool> DeleteCharacter(int id)

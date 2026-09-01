@@ -9,13 +9,13 @@ public class CharacterControllerController(ICharacterRepo _characterRepo) : Cont
 {
 
     [HttpGet]
-    public async Task<ActionResult<List<model.Character>>> GetCharacters()
+    public async Task<ActionResult<List<Dtos.CharacterDto>>> GetCharacters()
     {
         return Ok(await _characterRepo.GetCharacters());
     }
 
     [HttpGet("{id}")]
-    public async Task<ActionResult<model.Character>> GetCharacterById(int id)
+    public async Task<ActionResult<Dtos.CharacterDto>> GetCharacterById(int id)
     {
         try
         {

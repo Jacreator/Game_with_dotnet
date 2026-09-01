@@ -6,9 +6,9 @@ public interface ICharacterRepo
 
     Task<Dtos.CharacterDto> GetCharacterById(int id);
 
-    Task<Dtos.CharacterDto> AddCharacter(model.Character character);
+    Task<Dtos.CharacterDto> CreateCharacter(Dtos.CharacterCreateDto characterCreateDto);
 
-    Task<Dtos.CharacterDto> UpdateCharacter(model.Character character);
+    Task<Dtos.CharacterDto> UpdateCharacter(int id, Dtos.CharacterUpdateDto characterUpdateDto);
 
     Task<bool> DeleteCharacter(int id);
 }

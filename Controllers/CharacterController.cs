@@ -28,9 +28,17 @@ public class CharacterControllerController(ICharacterRepo _characterRepo) : Cont
     }
 
     [HttpPost]
-    public async Task<ActionResult<model.Character>> AddCharacter(model.Character character)
+    public async Task<ActionResult<Dtos.CharacterCreateDto>> AddCharacter(Dtos.CharacterCreateDto characterCreateDto)
     {
-        var newCharacter = await _characterRepo.AddCharacter(character);
+        var character = new model.Character
+        {
+            Name = characterCreateDto.Name,
+            Level = characterCreateDto.Level,
+            Class = characterCreateDto.Class,
+            Role = characterCreateDto.Role
+        };
+
+        var newCharacter = await _characterRepo.CreateCharacter(characterCreateDto);
         return CreatedAtAction(nameof(GetCharacterById), new { id = newCharacter.Id }, newCharacter);
     }
 }
